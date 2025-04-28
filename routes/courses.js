@@ -30,6 +30,8 @@ const upload = multer({
   storage: tempStorage
  });
 
+ //index route
+
 router.get('/', wrapAsync(async(req, res) => {
   if(req.user) {
     console.log(req.user.name)
@@ -44,10 +46,36 @@ router.get('/', wrapAsync(async(req, res) => {
     ])
     res.render("PYQs/index.ejs",{courses})
   }));
+
+  router.get("/search",wrapAsync(async (req,res)=>{
+    if(!req.query.search) return res.redirect("/courses")
+      let courses = await Course.aggregate([
+        {
+            $match: {
+                $or: [
+                    { title: { $regex: req.query.search, $options: "i" } },
+                    { code: { $regex: req.query.search, $options: "i" } },
+                ]
+            }
+        },
+        {
+            $group: {
+                _id: "$code",
+                title: { $first: "$title" }
+            }
+        }
+    ]);
+
+    res.render("PYQs/index.ejs",{courses})
+  }))
+
+   //new uplaod form route
   
   router.get('/new',isLoggedIn,(req,res)=>{
     res.render("PYQs/new.ejs")
   })
+
+   //show route
   
   router.get('/:code',wrapAsync(async(req,res)=>{
     let {code} = req.params
@@ -58,6 +86,7 @@ router.get('/', wrapAsync(async(req, res) => {
     res.render("PYQs/show.ejs",{courses})
   }))
 
+   //uplading and generating pdf post route    ||     new -> upload
 
 router.post('/newCourse', upload.array('course[image]', 4), wrapAsync(async (req, res) => {
 
@@ -140,6 +169,7 @@ router.post('/newCourse', upload.array('course[image]', 4), wrapAsync(async (req
     res.redirect('/courses');
 }));
   
+ //Edit route
   
   router.get("/edit/:id",wrapAsync(async (req,res)=>{
     if(!res.locals.currUserName==="VEESAM MAHESH"){return res.redirect("/courses")}
@@ -150,6 +180,8 @@ router.post('/newCourse', upload.array('course[image]', 4), wrapAsync(async (req
     }
     res.render("PYQs/edit.ejs",{course})
   }))
+
+   //update edit route
   
   router.patch("/:id",wrapAsync(async (req,res)=>{
     let {id} = req.params
@@ -158,6 +190,8 @@ router.post('/newCourse', upload.array('course[image]', 4), wrapAsync(async (req
     res.redirect("/courses")
   }))
   
+   //delete route
+
   router.delete("/delete/:id",wrapAsync(async (req,res)=>{
     if(!res.locals.currUserName==="VEESAM MAHESH"){return res.redirect("/courses")}
     let {id} = req.params
