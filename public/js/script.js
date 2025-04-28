@@ -21,3 +21,11 @@
       );
     });
   })();
+  
+    const form = document.getElementById('uploadForm');
+    const uploadBtn = document.getElementById('uploadBtn');
+
+    form.addEventListener('submit', function() {
+        uploadBtn.disabled = true;          // Disable the button
+        uploadBtn.innerText = "Uploading...";  // Optional: Change button text
+    });

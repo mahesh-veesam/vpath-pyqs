@@ -2,7 +2,7 @@
 <%- include("../includes/upload.ejs") %>
 <div class="container mt-4" data-bs-theme="dark">
     <h2 class="fw-medium fs-4 mx-3">Upload Question Paper</h2>
-    <form method="post" action="/courses/newCourse" class="needs-validation row g-3 mt-3 mx-3" novalidate enctype="multipart/form-data">
+    <form method="post" action="/courses/newCourse" class="needs-validation row g-3 mt-3 mx-3"  id="uploadForm" novalidate enctype="multipart/form-data">
         <div class="col-md-4">
             <label for="code" class="form-label">Course code</label>
             <input name="course[code]" type="text" id="code" class="form-control" placeholder="SWE1004" maxlength="7" required>
@@ -49,7 +49,7 @@
             <input name="course[image]" type="file" id="image" class="form-control" placeholder="Upload Image" multiple required>    
         </div>
         <div class="col-md-6 mt-5">
-            <button class="btn btn-primary px-3">Upload</button>
+            <button class="btn btn-primary px-3" id="uploadBtn">Upload</button>
         </div>
     </form>    
 </div>
