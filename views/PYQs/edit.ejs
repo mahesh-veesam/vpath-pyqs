@@ -1,0 +1,50 @@
+<% layout("layouts/boilerplate") %>
+<div class="container mt-4" data-bs-theme="dark">
+    <h2 class="fw-medium fs-4 mx-3">Edit Question Paper</h2>
+    <form method="post" action="/courses/<%=course._id%>?_method=PATCH" class="needs-validation row g-3 mt-2 mx-3" novalidate>
+        <div class="col-md-4">
+            <label for="code" class="form-label">Course code</label>
+            <input name="course[code]" type="text" id="code" class="form-control" value="<%=course.code%>" placeholder="SWE1004" maxlength="7" required>
+        </div>
+        <div class="col-md-8">
+            <label for="title" class="form-label">Course Title</label>
+            <input name="course[title]" type="text" id="title" class="form-control" value="<%=course.title%>" placeholder="Introduction to Programming" required>    
+        </div>
+        <div class="col-md-6 mt-4">
+            <label for="slot">Slot</label>
+            <select class="form-select form-control mt-2" id="slot" name="course[slot]" aria-label="Default select example" required>
+                <option value="<%=course.slot%>"  selected><%=course.slot%></option>
+                <option value="A1">A1</option>
+                <option value="A2">A2</option>
+                <option value="B1">B1</option>
+                <option value="B2">B2</option>
+                <option value="C1">C1</option>
+                <option value="C1">C2</option>
+                <option value="D1">D1</option>
+                <option value="D2">D2</option>
+                <option value="E1">E1</option>
+                <option value="E2">E2</option>
+                <option value="F1">F1</option>
+                <option value="F2">F2</option>
+                <option value="G1">G1</option>
+                <option value="G2">G2</option>
+            </select>
+        </div>
+        <div class="col-md-6 mt-4">
+            <label for="exam">Exam</label>
+            <select class="form-select mt-2" id="exam" name="course[examType]" aria-label="Default select example" required>
+                <option value="<%=course.examType%>" selected><%=course.examType%></option>
+                <option value="CAT1">CAT1</option>
+                <option value="CAT2">CAT2</option>
+                <option value="FAT">FAT</option>
+            </select>
+        </div>
+        <div class="col-md-12"> 
+            <label for="date" class="form-label">Date</label>
+            <input name="course[date]" id="date" type="date" value="<%=course.date%>" class="form-control" placeholder="Date" required>
+        </div>
+        <div class="col-md-6 mt-4">
+            <button class="btn btn-primary px-3">Create</button>
+        </div>
+    </form>  
+</div>

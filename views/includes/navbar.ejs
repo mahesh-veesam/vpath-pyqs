@@ -1,0 +1,20 @@
+<nav class="navbar">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a class="navbar-brand d-flex align-items-center" href="https://vpath.vercel.app">
+        <img src="https://vpath.netlify.app/assets/Learn_with_Ease-removebg-preview.png" 
+             alt="Logo" 
+             class="img-fluid mx-2" 
+             style="max-height: 50px;">
+      </a>
+      <%if(!currUser){%>
+      <a class="navbar-brand" href="/auth/google">
+        <button class="btn btn-primary rounded-pill shadow-sm px-3 py-2 ">Log in</button>
+      </a>
+      <%}%>
+      <%if(currUser){%>
+        <a class="navbar-brand" href="/auth/logout">
+          <button class="btn btn-primary rounded-pill shadow-sm px-3 py-2 "> Log out</button>
+        </a>
+        <%}%>
+    </div>
+</nav>

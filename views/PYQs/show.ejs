@@ -1,0 +1,48 @@
+<% layout("/layouts/boilerplate") %>
+<div class="container">
+    <h3 class="fs-5 fw-semibold mx-2"><%=courses[0].code%></h3>
+    <h3 class="fs-6 fw-medium mx-2"><%=courses[0].title%></h3>
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-2 mt-3 m-1" data-bs-theme="dark">
+        <%for(let course of courses){%>
+            <div class="card p-3 me-3">
+                <div class="card-body">
+                    <p class="card-text fs-5 fw-semibold">Slot : <%=course.slot%></p>
+                </div>
+                <div class="card-body">
+                    <p class="card-text fs-6 fw-medium">Exam : <%=course.examType%></p>
+                </div>
+                <div class="card-body">
+                    <p class="card-text fs-6 fw-medium">Date : <%=course.date.toString().slice(3,15)%></p>
+                </div>
+                <div class="card-body">
+                    <p class="card-text fs-6 fw-medium">Uploaded By : <%=course.uploadedBy ? course.uploadedBy.name : "anonymous" %></p>
+                </div>
+                <div class="card-body">
+                    <p class="card-text fs-6 fw-medium">Uploaded On : <%=course.uploadedAt.toString().slice(3,15)%></p>
+                </div>
+                <div class="container mt-3 text-center">
+                    <div class="row">
+                        <div class="col">
+                            <%if(currUserName==="VEESAM MAHESH"){%>
+                                <form method="get" action="/courses/edit/<%=course._id%>">
+                                    <button class="btn mb-3">Edit</button>
+                                </form>
+                            <%}else{}%>
+                        </div>
+                        <div class="col">
+                            <a href="<%= course.pdf.url %>" download="MyCourse.pdf" target="_blank" class="btn">Download</a>
+                        </div>
+                        <div class="col">
+                            <%if(currUserName==="VEESAM MAHESH"){%>
+                                <form method="post" action="/courses/delete/<%=course._id%>?_method=DELETE">
+                                    <button class="btn">Delete</button>
+                                </form>
+                            <%}else{}%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <%}%>
+    </div>
+</div>
+
