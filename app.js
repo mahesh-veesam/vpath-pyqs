@@ -129,28 +129,3 @@ app.use((err,req,res,next)=>{
 app.listen(port,()=>{
   console.log("server started running")
 })
-
-// const User = require("./user")
-// const mongoose = require("mongoose")
-
-// async function connectMongoose(){
-  
-//     await mongoose.connect("mongodb+srv://vpath:lIRg8LSaXlTsipIM@cluster0.xvmktho.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-// }
-// connectMongoose().then(()=>{console.log("Connected successfully")}).catch((err)=>{console.log(err)})
-
-
-// async function getData(){
-//     let data = await User.find()
-//     console.log(data)
-// }
-// getData()
-
-// async function updateData(){
-//     // let data = await User.find()
-//     // for(d of data){
-//     //     d.displayName = 
-//     //     console.log(d.name)
-//     // }
-// }
-// updateData()
