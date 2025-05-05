@@ -76,11 +76,15 @@ async (accessToken, refreshToken, profile, done) => {
     if (user) {
       return done(null, user)
     };
+
+    let emailname = email.split(".")[0]
+    let ename = emailname[0].toUpperCase() + emailname.slice(1)
   
     const newUser = await User.create({
       googleId: profile.id,
       email: email,
       name: profile.name.givenName,
+      displayName : ename
     });
 
     return done(null, newUser);
@@ -126,3 +130,27 @@ app.listen(port,()=>{
   console.log("server started running")
 })
 
+// const User = require("./user")
+// const mongoose = require("mongoose")
+
+// async function connectMongoose(){
+  
+//     await mongoose.connect("mongodb+srv://vpath:lIRg8LSaXlTsipIM@cluster0.xvmktho.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+// }
+// connectMongoose().then(()=>{console.log("Connected successfully")}).catch((err)=>{console.log(err)})
+
+
+// async function getData(){
+//     let data = await User.find()
+//     console.log(data)
+// }
+// getData()
+
+// async function updateData(){
+//     // let data = await User.find()
+//     // for(d of data){
+//     //     d.displayName = 
+//     //     console.log(d.name)
+//     // }
+// }
+// updateData()

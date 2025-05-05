@@ -11,7 +11,7 @@ router.get('/google',
 router.get('/google/callback', saveRedirectUrl,
   passport.authenticate('google', { failureRedirect: '/courses', failureFlash : true }),
   async(req, res) => {
-    req.flash("success",`Welcome to VPATH , ${req.user.name}`)
+    req.flash("success",`Welcome to VPATH, ${req.user.displayName}`)
     let redirectUrl = res.locals.redirectUrl || "/courses"
     console.log(redirectUrl)
     res.redirect(redirectUrl);

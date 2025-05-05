@@ -6,7 +6,12 @@ const UserSchema = new mongoose.Schema({
     type : String,
     required : true,
     _id : false,
-  },     
+  },
+  displayName: {
+    type : String,
+    required : true,
+    _id : false,
+  },
   email: String,
   role: { type: String, default: "student" } // or 'admin'
 });
