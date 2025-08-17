@@ -122,7 +122,7 @@ app.use((err,req,res,next)=>{
   res.render("error.ejs",{message})
 })
 
-app.listen(port,()=>{
+app.listen(port,"0.0.0.0",()=>{
   console.log("server started running")
 })
 
